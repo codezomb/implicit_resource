@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_29_195908) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_21_044857) do
   create_table "articles", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", primary_key: ["author_id", "slug"], force: :cascade do |t|
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.string "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x0000ffff9de4e240>"
   end
 
 end

@@ -35,7 +35,7 @@ module ImplicitResource
 
   def resource
     @resource ||= if params[:id].present?
-      collection.find(params[:id])
+      collection.find(primary_key)
     else
       collection.new
     end
@@ -62,6 +62,14 @@ module ImplicitResource
       unless destroy_resource
         persist_resource
       end
+    end
+  end
+
+  def primary_key
+    if model_klass.primary_key.is_a?(Array)
+      params.try(:extract_value, :id)
+    else
+      params[:id]
     end
   end
 end
