@@ -17,7 +17,7 @@ ArticlesController < ApplicationController
 
   private
 
-  def permitted_params
+  def permitted_attributes(resource)
     params.require(:article).permit(:title, :body)
   end
 end
